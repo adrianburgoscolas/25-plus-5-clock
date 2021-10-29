@@ -17,7 +17,7 @@ function App() {
         
       </header>
       
-      <div id="break-label">Break Length</div>
+      <div id="break-label">Break Length prueba de git hub en vscode</div>
       <div id="break-length">{breakLength}</div>
       <button id="break-decrement" onClick={()=>setBreak((state)=>{
         if(state>1){
