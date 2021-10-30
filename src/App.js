@@ -3,11 +3,13 @@ import { useState } from 'react';
 import './App.css';
 import timerFormat from './Functions/timerformat';
 
+const FACTOR = 60;
+
 function App() {
   const [breakLength,setBreak] = useState(5);
   const [sessionLength,setSession] = useState(25);
   const [sessionStart,setSessionStart] = useState(false);
-  const [timer,setTimer] = useState({session:25*60,break:5*60});
+  const [timer,setTimer] = useState({session:25*FACTOR,break:5*FACTOR});
   const [sessionSelector,setSelector] = useState(true);
 
   useEffect(()=>{
@@ -18,14 +20,14 @@ function App() {
             setTimer((state)=>{ return {...state,session:state.session-1}});
           }else{
             setSelector((state)=>!state);
-            setTimer((state)=>{ return {...state,session:sessionLength}});
+            setTimer((state)=>{ return {...state,session:sessionLength*FACTOR}});
           }
         }else{
           if(timer.break > 0){
             setTimer((state)=>{ return {...state,break:state.break-1}})
           }else{
             setSelector((state)=>!state)
-            setTimer((state)=>{ return {...state,break:breakLength}})
+            setTimer((state)=>{ return {...state,break:breakLength*FACTOR}})
           }
         }
       }
@@ -44,8 +46,8 @@ function App() {
       <button id="break-decrement" onClick={()=>{
         if(!sessionStart){
           setBreak((state)=>{
-            if(state>1){
-              setTimer((timer)=>{ return {...timer,break:(state*60)-60}})
+            if((state)>1){
+              setTimer((timer)=>{ return {...timer,break:(state*FACTOR)-FACTOR}})
               return state-1;
             }else{
               return state;
@@ -56,8 +58,8 @@ function App() {
       <button id="break-increment" onClick={()=>{
         if(!sessionStart){
           setBreak((state)=>{
-            if(state<60){
-              setTimer((timer)=>{ return {...timer,break:(state*60)+60}})
+            if((state)<60){
+              setTimer((timer)=>{ return {...timer,break:(state*FACTOR)+FACTOR}})
               return state+1;
             }else{
               return state;
@@ -73,7 +75,7 @@ function App() {
         if(!sessionStart){
           setSession((state)=>{
             if(state>1){
-              setTimer((timer)=>{ return {...timer,session:(state*60)-60}})
+              setTimer((timer)=>{ return {...timer,session:(state*FACTOR)-FACTOR}})
               return state-1;
             }else{
               return state;
@@ -85,7 +87,7 @@ function App() {
         if(!sessionStart){
           setSession((state)=>{
             if(state<60){
-              setTimer((timer)=>{ return {...timer,session:(state*60)+60}})
+              setTimer((timer)=>{ return {...timer,session:(state*FACTOR)+FACTOR}})
               return state+1;
             }else{
               return state;
@@ -108,7 +110,7 @@ function App() {
         setBreak(5);
         setSession(25);
         setSessionStart(false);
-        setTimer({session:25*60,break:5*60})
+        setTimer({session:25*FACTOR,break:5*FACTOR})
         setSelector(true);
       }}>reset</button>
       <footer>
