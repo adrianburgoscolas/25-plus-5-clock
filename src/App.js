@@ -10,43 +10,60 @@ function App() {
   const [timer,setTimer] = useState({session:25,break:5});
   const [sessionSelector,setSelector] = useState(true);
   const [timerInit,setTimerInit] = useState({session:false,break:false});
-  const [timeLeft,setTimeLeft] = useState('25:00');
+  // const [timeLeft,setTimeLeft] = useState('25:00');
   
 
   useEffect(()=>{
     
+    // if(sessionSelector){
+      
+    //   setTimeLeft(timerFormat(timer.session));
+    // }else{
+      
+    //   setTimeLeft(timerFormat(timer.break));
+    // }
     let timeOut = setTimeout(()=>{
       if(sessionStart){
         if(timerInit.session){
           setTimer((state)=>{ return {...state,session:sessionLength}});
+          // setTimeLeft(timerFormat(sessionLength));
           setTimerInit((state)=>{ return {...state,session:false}});
         }
         if(timerInit.break){
-          setTimer((state)=>{ return {...state,break:breakLength}})
-          setTimerInit((state)=>{ return {...state,break:false}})
+          setTimer((state)=>{ return {...state,break:breakLength}});
+          // setTimeLeft(timerFormat(breakLength));
+          setTimerInit((state)=>{ return {...state,break:false}});
         }
         
         if(sessionSelector){
+          
           if(timer.session > 0){
-            setTimer((state)=>{ return {...state,session:state.session-1}})
+            setTimer((state)=>{ return {...state,session:state.session-1}});
+            // setTimeLeft(timerFormat(timer.session));
           }else{
             setSelector((state)=>!state);
-            setTimer((state)=>{ return {...state,session:sessionLength}})
-            setTimeLeft(timerFormat(timer.session));
+            setTimer((state)=>{ return {...state,session:sessionLength}});
+            // setTimeLeft(timerFormat(sessionLength));
           }
+          
         }else{
+          // setTimeLeft(timerFormat(timer.break));
           if(timer.break > 0){
             setTimer((state)=>{ return {...state,break:state.break-1}})
+            // setTimeLeft(timerFormat(timer.break));
           }else{
             setSelector((state)=>!state)
             setTimer((state)=>{ return {...state,break:breakLength}})
-            setTimeLeft(timerFormat(timer.break));
+            // setTimeLeft(timerFormat(breakLength));
           }
+          
         }
       }
       
     },1000);
-    
+    console.log('timer '+timer.session+' '+timer.break);
+    console.log(sessionLength)
+    console.log(breakLength)
     return ()=>clearTimeout(timeOut);
   });
 
@@ -115,7 +132,7 @@ function App() {
       
       {/*DISPLAY */}
       <div id="timer-label">{sessionSelector?'Session':'Break'}</div>
-      <div id="time-left">{timeLeft}</div>
+      <div id="time-left">{sessionSelector?timerFormat(timer.session):timerFormat(timer.break)}</div>
 
       {/* START/STOP */}
       <button id="start_stop" onClick={()=>{
@@ -135,6 +152,7 @@ function App() {
         setSessionStart(false);
         setTimer({session:25,break:5})
         setSelector(true);
+        // setTimeLeft('25:00');
       }}>reset</button>
       <footer>
 
