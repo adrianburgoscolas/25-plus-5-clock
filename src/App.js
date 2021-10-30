@@ -7,7 +7,7 @@ function App() {
   const [breakLength,setBreak] = useState(5);
   const [sessionLength,setSession] = useState(25);
   const [sessionStart,setSessionStart] = useState(false);
-  const [timer,setTimer] = useState({session:25,break:5});
+  const [timer,setTimer] = useState({session:25*60,break:5*60});
   const [sessionSelector,setSelector] = useState(true);
 
   useEffect(()=>{
@@ -45,7 +45,7 @@ function App() {
         if(!sessionStart){
           setBreak((state)=>{
             if(state>1){
-              setTimer((timer)=>{ return {...timer,break:state-1}})
+              setTimer((timer)=>{ return {...timer,break:(state*60)-60}})
               return state-1;
             }else{
               return state;
@@ -57,7 +57,7 @@ function App() {
         if(!sessionStart){
           setBreak((state)=>{
             if(state<60){
-              setTimer((timer)=>{ return {...timer,break:state+1}})
+              setTimer((timer)=>{ return {...timer,break:(state*60)+60}})
               return state+1;
             }else{
               return state;
@@ -73,7 +73,7 @@ function App() {
         if(!sessionStart){
           setSession((state)=>{
             if(state>1){
-              setTimer((timer)=>{ return {...timer,session:state-1}})
+              setTimer((timer)=>{ return {...timer,session:(state*60)-60}})
               return state-1;
             }else{
               return state;
@@ -85,7 +85,7 @@ function App() {
         if(!sessionStart){
           setSession((state)=>{
             if(state<60){
-              setTimer((timer)=>{ return {...timer,session:state+1}})
+              setTimer((timer)=>{ return {...timer,session:(state*60)+60}})
               return state+1;
             }else{
               return state;
@@ -108,7 +108,7 @@ function App() {
         setBreak(5);
         setSession(25);
         setSessionStart(false);
-        setTimer({session:25,break:5})
+        setTimer({session:25*60,break:5*60})
         setSelector(true);
       }}>reset</button>
       <footer>
