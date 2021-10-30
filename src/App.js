@@ -24,16 +24,16 @@ function App() {
     // }
     let timeOut = setTimeout(()=>{
       if(sessionStart){
-        if(timerInit.session){
-          setTimer((state)=>{ return {...state,session:sessionLength+1}});
-          // setTimeLeft(timerFormat(sessionLength));
-          setTimerInit((state)=>{ return {...state,session:false}});
-        }
-        if(timerInit.break){
-          setTimer((state)=>{ return {...state,break:breakLength+1}});
-          // setTimeLeft(timerFormat(breakLength));
-          setTimerInit((state)=>{ return {...state,break:false}});
-        }
+        // if(timerInit.session){
+        //   setTimer((state)=>{ return {...state,session:sessionLength+1}});
+        //   // setTimeLeft(timerFormat(sessionLength));
+        //   setTimerInit((state)=>{ return {...state,session:false}});
+        // }
+        // if(timerInit.break){
+        //   setTimer((state)=>{ return {...state,break:breakLength+1}});
+        //   // setTimeLeft(timerFormat(breakLength));
+        //   setTimerInit((state)=>{ return {...state,break:false}});
+        // }
         
         if(sessionSelector){
           
@@ -78,9 +78,10 @@ function App() {
       <div id="break-length">{breakLength}</div>
       <button id="break-decrement" onClick={()=>{
         if(!sessionStart){
-          setTimerInit((state)=>{ return {...state,break:true}})
+          // setTimerInit((state)=>{ return {...state,break:true}})
           setBreak((state)=>{
             if(state>1){
+              setTimer((timer)=>{ return {...timer,break:state-1}})
               return state-1;
             }else{
               return state;
@@ -90,9 +91,10 @@ function App() {
       }}>-</button>
       <button id="break-increment" onClick={()=>{
         if(!sessionStart){
-          setTimerInit((state)=>{ return {...state,break:true}})
+          // setTimerInit((state)=>{ return {...state,break:true}})
           setBreak((state)=>{
             if(state<60){
+              setTimer((timer)=>{ return {...timer,break:state+1}})
               return state+1;
             }else{
               return state;
@@ -106,9 +108,10 @@ function App() {
       <div id="session-length">{sessionLength}</div>
       <button id="session-decrement" onClick={()=>{
         if(!sessionStart){
-          setTimerInit((state)=>{ return {...state,session:true}})
+          // setTimerInit((state)=>{ return {...state,session:true}})
           setSession((state)=>{
             if(state>1){
+              setTimer((timer)=>{ return {...timer,session:state-1}})
               return state-1;
             }else{
               return state;
@@ -119,9 +122,10 @@ function App() {
       }}>-</button>
       <button id="session-increment" onClick={()=>{
         if(!sessionStart){
-          setTimerInit((state)=>{ return {...state,session:true}})
+          // setTimerInit((state)=>{ return {...state,session:true}})
           setSession((state)=>{
             if(state<60){
+              setTimer((timer)=>{ return {...timer,session:state+1}})
               return state+1;
             }else{
               return state;
