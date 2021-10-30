@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './App.css';
 import timerFormat from './Functions/timerformat';
 
-const FACTOR = 60;
+const FACTOR = 60;//count on minutes(FACTOR = 60), count on seconds for debbuging(FACTOR = 1)
 
 function App() {
   const [breakLength,setBreak] = useState(5);
@@ -12,25 +12,46 @@ function App() {
   const [timer,setTimer] = useState({session:25*FACTOR,break:5*FACTOR});
   const [sessionSelector,setSelector] = useState(true);
 
+  const audio = document.getElementById('beep'); 
+
   useEffect(()=>{
     let timeOut = setTimeout(()=>{
+      
       if(sessionStart){
         if(sessionSelector){
           if(timer.session > 0){
+            if(timer.session===1){
+              audio.currentTime = 0;
+              audio.play();
+            }
+              
+            
             setTimer((state)=>{ return {...state,session:state.session-1}});
           }else{
+            audio.currentTime = 0;
+            audio.play();
+            console.log('beep')
             setSelector((state)=>!state);
             setTimer((state)=>{ return {...state,session:sessionLength*FACTOR}});
           }
         }else{
           if(timer.break > 0){
+            if(timer.break===1){
+              audio.currentTime = 0;
+              audio.play();
+            }
+              
+            
             setTimer((state)=>{ return {...state,break:state.break-1}})
           }else{
+            
+            console.log('beep')
             setSelector((state)=>!state)
             setTimer((state)=>{ return {...state,break:breakLength*FACTOR}})
           }
         }
       }
+      
     },1000);
     return ()=>clearTimeout(timeOut);
   });
@@ -107,12 +128,17 @@ function App() {
 
       {/* RESET */}
       <button id="reset" onClick={()=>{
+        audio.pause();
+        audio.currentTime = 0;
         setBreak(5);
         setSession(25);
         setSessionStart(false);
         setTimer({session:25*FACTOR,break:5*FACTOR})
         setSelector(true);
       }}>reset</button>
+      <audio id="beep" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav">
+        Your browser does not support the audio element.
+      </audio>
       <footer>
 
       </footer>

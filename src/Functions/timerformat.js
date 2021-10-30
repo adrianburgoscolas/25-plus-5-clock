@@ -2,9 +2,6 @@
 const timerFormat = (timer)=>{
     let min = Math.floor(timer/60);
     let sec = timer%60;
-    console.log(timer)
-    console.log(min)
-    console.log(sec)
     let minStr = min.toString();
     let secStr = sec.toString();
     if(min<10){
