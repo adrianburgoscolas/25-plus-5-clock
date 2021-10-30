@@ -25,12 +25,12 @@ function App() {
     let timeOut = setTimeout(()=>{
       if(sessionStart){
         if(timerInit.session){
-          setTimer((state)=>{ return {...state,session:sessionLength}});
+          setTimer((state)=>{ return {...state,session:sessionLength+1}});
           // setTimeLeft(timerFormat(sessionLength));
           setTimerInit((state)=>{ return {...state,session:false}});
         }
         if(timerInit.break){
-          setTimer((state)=>{ return {...state,break:breakLength}});
+          setTimer((state)=>{ return {...state,break:breakLength+1}});
           // setTimeLeft(timerFormat(breakLength));
           setTimerInit((state)=>{ return {...state,break:false}});
         }
@@ -61,9 +61,9 @@ function App() {
       }
       
     },1000);
-    console.log('timer '+timer.session+' '+timer.break);
-    console.log(sessionLength)
-    console.log(breakLength)
+    // console.log('timer '+timer.session+' '+timer.break);
+    // console.log(sessionLength)
+    // console.log(breakLength)
     return ()=>clearTimeout(timeOut);
   });
 
