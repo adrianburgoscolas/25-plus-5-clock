@@ -63,13 +63,13 @@ button{
     height: 35px;
     font-size: 20px;
     /* outline: 1px solid white; */
-    border: 2px solid silver;
+    border: 1px solid rgb(225, 225, 225);
     background-color: rgb(255, 255, 255);
     color: gray;
     transition: all 0.2s;
 }
 button:hover{
-    background-color: silver;
+    background-color: rgb(225, 225, 225);
     color: rgb(95, 95, 95);
 }
 @media (max-width:470px){
