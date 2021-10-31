@@ -24,13 +24,10 @@ function App() {
               audio.currentTime = 0;
               audio.play();
             }
-              
-            
             setTimer((state)=>{ return {...state,session:state.session-1}});
           }else{
             audio.currentTime = 0;
             audio.play();
-            console.log('beep')
             setSelector((state)=>!state);
             setTimer((state)=>{ return {...state,session:sessionLength*FACTOR}});
           }
@@ -40,12 +37,8 @@ function App() {
               audio.currentTime = 0;
               audio.play();
             }
-              
-            
             setTimer((state)=>{ return {...state,break:state.break-1}})
           }else{
-            
-            console.log('beep')
             setSelector((state)=>!state)
             setTimer((state)=>{ return {...state,break:breakLength*FACTOR}})
           }
