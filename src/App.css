@@ -1,0 +1,100 @@
+body{
+    background-color: rgb(245, 245, 245);
+}
+.App{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    
+}
+
+#container{
+    background-color: rgb(255, 255, 255);
+    margin-top: 100px;
+    padding:30px;
+    border-radius: 25px;
+    box-shadow: 0 5px 15px 0 rgb(0, 0, 0,0.3);
+    width: 400px;
+}
+#timer-label,#time-left{
+    
+    text-align: center;
+    
+}
+#timer-label{
+    font-size: 30px;
+}
+#time-left{
+    font-size: 130px;
+    font-family: 'Nunito', sans-serif;
+}
+.App-header{
+    
+    text-align: center;
+    font-size: 35px;
+}
+
+#session-break-box{
+    display: flex;
+    justify-content: space-between;
+}
+#break-box,#session-box{
+    width: 135px;
+    text-align: center;
+}
+#session-increment,#session-decrement,#break-increment,#break-decrement{
+    width:50%;
+}
+#session-increment,#break-increment{
+    border-radius: 0 15px 0 0;
+}
+#session-decrement, #break-decrement{
+    border-radius: 15px 0 0 0;
+}
+#reset,#start_stop{
+    width:100%;
+    border-radius: 0 0 15px 15px;
+   /* margin-top: 1px; */
+}
+
+button{
+    height: 35px;
+    font-size: 20px;
+    /* outline: 1px solid white; */
+    border: 2px solid silver;
+    background-color: rgb(255, 255, 255);
+    color: gray;
+    transition: all 0.2s;
+}
+button:hover{
+    background-color: silver;
+    color: rgb(95, 95, 95);
+}
+@media (max-width:470px){
+    #container{
+        width: 70%;
+        min-width: 290px;            
+        margin-top: 10px;
+        padding: 15px;
+    }
+    .App-header{
+        
+        font-size: 25px;
+    }
+    #time-left{
+        font-size: 90px;
+    }
+}
+
+footer{
+    padding:10px;
+    text-align: center;
+}
+footer a{
+    
+    color: gray;
+    background-color: transparent;
+    text-decoration: none;
+}

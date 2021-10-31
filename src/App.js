@@ -50,91 +50,104 @@ function App() {
   });
   return (
     <div className="App">
-      <header className="App-header">
+      <div id='container'>
+        <header className="App-header">
+          <h1>25 + 5 Clock</h1>
+        </header>
         
-      </header>
-      
-      {/* Break block */}
-      <div id="break-label">Break Length</div>
-      <div id="break-length">{breakLength}</div>
-      <button id="break-decrement" onClick={()=>{
-        if(!sessionStart){
-          setBreak((state)=>{
-            if((state)>1){
-              setTimer((timer)=>{ return {...timer,break:(state*FACTOR)-FACTOR}})
-              return state-1;
-            }else{
-              return state;
-            }
-          })
-        }
-      }}>-</button>
-      <button id="break-increment" onClick={()=>{
-        if(!sessionStart){
-          setBreak((state)=>{
-            if((state)<60){
-              setTimer((timer)=>{ return {...timer,break:(state*FACTOR)+FACTOR}})
-              return state+1;
-            }else{
-              return state;
-            }
-          })
-        }
-      }}>+</button>
-      
-      {/* Session block */}
-      <div id="session-label">Session Length</div>
-      <div id="session-length">{sessionLength}</div>
-      <button id="session-decrement" onClick={()=>{
-        if(!sessionStart){
-          setSession((state)=>{
-            if(state>1){
-              setTimer((timer)=>{ return {...timer,session:(state*FACTOR)-FACTOR}})
-              return state-1;
-            }else{
-              return state;
-            }
-          })
-        }
-      }}>-</button>
-      <button id="session-increment" onClick={()=>{
-        if(!sessionStart){
-          setSession((state)=>{
-            if(state<60){
-              setTimer((timer)=>{ return {...timer,session:(state*FACTOR)+FACTOR}})
-              return state+1;
-            }else{
-              return state;
-            }
-          })
-        }
-      }}>+</button>
-      
-      {/*DISPLAY */}
-      <div id="timer-label">{sessionSelector?'Session':'Break'}</div>
-      <div id="time-left">{sessionSelector?timerFormat(timer.session):timerFormat(timer.break)}</div>
+        {/*DISPLAY */}
+        <div id="timer-label">{sessionSelector?'Session':'Break'}</div>
+        <div id="time-left">{sessionSelector?timerFormat(timer.session):timerFormat(timer.break)}</div>
+        
+        <div id='session-break-box'>
+          
+          {/* Session block */}
+          <div id='session-box'>
+            <div id="session-label">Session Length</div>
+            <div id="session-length">{sessionLength}</div>
+            <button id="session-decrement" onClick={()=>{
+              if(!sessionStart){
+                setSession((state)=>{
+                  if(state>1){
+                    setTimer((timer)=>{ return {...timer,session:(state*FACTOR)-FACTOR}})
+                    return state-1;
+                  }else{
+                    return state;
+                  }
+                })
+              }
+            }}>-</button>
+            <button id="session-increment" onClick={()=>{
+              if(!sessionStart){
+                setSession((state)=>{
+                  if(state<60){
+                    setTimer((timer)=>{ return {...timer,session:(state*FACTOR)+FACTOR}})
+                    return state+1;
+                  }else{
+                    return state;
+                  }
+                })
+              }
+            }}>+</button>
+            {/* START/STOP */}
+        <button id="start_stop" onClick={()=>{
+          setSessionStart((state)=>!state);
+        }}>{sessionStart?'Pause':'Start'}</button>
+          </div>
 
-      {/* START/STOP */}
-      <button id="start_stop" onClick={()=>{
-        setSessionStart((state)=>!state);
-      }}>{sessionStart?'Pause':'Start'}</button>
+            {/* Break block */}
+          <div id='break-box'>
+            <div id="break-label">Break Length</div>
+            <div id="break-length">{breakLength}</div>
+            <button id="break-decrement" onClick={()=>{
+              if(!sessionStart){
+                setBreak((state)=>{
+                  if((state)>1){
+                    setTimer((timer)=>{ return {...timer,break:(state*FACTOR)-FACTOR}})
+                    return state-1;
+                  }else{
+                    return state;
+                  }
+                })
+              }
+            }}>-</button>
+            <button id="break-increment" onClick={()=>{
+              if(!sessionStart){
+                setBreak((state)=>{
+                  if((state)<60){
+                    setTimer((timer)=>{ return {...timer,break:(state*FACTOR)+FACTOR}})
+                    return state+1;
+                  }else{
+                    return state;
+                  }
+                })
+              }
+            }}>+</button>
+                {/* RESET */}
+            <button id="reset" onClick={()=>{
+              audio.pause();
+              audio.currentTime = 0;
+              setBreak(5);
+              setSession(25);
+              setSessionStart(false);
+              setTimer({session:25*FACTOR,break:5*FACTOR})
+              setSelector(true);
+            }}>Reset</button>
+          </div>
+          
+        </div>
 
-      {/* RESET */}
-      <button id="reset" onClick={()=>{
-        audio.pause();
-        audio.currentTime = 0;
-        setBreak(5);
-        setSession(25);
-        setSessionStart(false);
-        setTimer({session:25*FACTOR,break:5*FACTOR})
-        setSelector(true);
-      }}>reset</button>
-      <audio id="beep" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav">
-        Your browser does not support the audio element.
-      </audio>
+        
+
+        
+        <audio id="beep" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav">
+          Your browser does not support the audio element.
+        </audio>
+        
+      </div>
       <footer>
-
-      </footer>
+          <a rel='noreferrer' href='https://www.freecodecamp.org/fcce3ec214d-b0f9-4ddc-b526-34aea3d1e4a3' target='_blank'>by Adrian Burgos</a>
+        </footer>
     </div>
   );
 }
