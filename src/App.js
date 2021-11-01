@@ -25,6 +25,7 @@ function App() {
               audio.play();
             }
             setTimer((state)=>{ return {...state,session:state.session-1}});
+            document.getElementById('title').innerHTML = 'Session '+timerFormat(timer.session);
           }else{
             audio.currentTime = 0;
             audio.play();
@@ -38,11 +39,15 @@ function App() {
               audio.play();
             }
             setTimer((state)=>{ return {...state,break:state.break-1}})
+            document.getElementById('title').innerHTML = 'Break '+timerFormat(timer.break);
           }else{
             setSelector((state)=>!state)
             setTimer((state)=>{ return {...state,break:breakLength*FACTOR}})
           }
         }
+         
+      }else{
+        document.getElementById('title').innerHTML = '25 + 5 clock'
       }
       
     },1000);
@@ -136,10 +141,6 @@ function App() {
           </div>
           
         </div>
-
-        
-
-        
         <audio id="beep" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav">
           Your browser does not support the audio element.
         </audio>
